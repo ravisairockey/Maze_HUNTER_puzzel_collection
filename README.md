@@ -1,8 +1,5 @@
 # Maze_HUNTER_puzzel_collection
  an simple puzzle games collection
-# 2D_Platformer
- just an simple 2d game made on unity
-
 
 
 <a href="https://pay.google.com" target="_blank">
