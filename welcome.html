@@ -1,0 +1,237 @@
+<html>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<head>
+    <title>Intro Animation</title>
+<style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:700');
+
+
+
+
+* {
+  cursor: none;
+}
+body {
+  background-color: #111;
+  cursor: none;
+  background-image: radial-gradient(#333, #111);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  text-align: center;
+  width: 100vw;
+  font-weight: 700;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+
+/* skip button */
+#skipButton {
+    position: absolute;
+                text-decoration: none;
+                right: -10px;
+                top: 40%;
+                transform: translateY(-50%);
+                background-color: #333;
+                padding: 4px;
+                color: rgb(255, 255, 255);
+                outline: auto;
+                outline-style:groove;
+                outline-color: rgb(255, 255, 255);
+                font-family: sans-serif;
+                font-weight: bold;
+                cursor: pointer ;
+                transition: right 0.5s ease; /* Only transition the right property */
+}
+
+#skipButton:hover {
+    right: 0px; /* Slide in from the right upon hover */
+            text-decoration: none; /* Remove underline */
+}
+
+
+
+#fly-in {
+  font-size: 4em;
+  margin: 40vh auto;
+  height: 20vh; 
+  text-transform: uppercase;
+}
+
+#fly-in span {
+  display: block;
+  font-size: .4em;
+  opacity: .8;
+}
+
+#fly-in div {
+ position: fixed;
+  margin: 2vh 0;
+  opacity: 0;
+  left: 10vw;
+  width: 80vw;
+  animation: switch 32s linear infinite;
+}
+
+.circle {
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
+  background-color: black;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999999; /* so that it stays on top of all other elements */
+}
+
+#fly-in div:nth-child(2) { animation-delay: 4s}
+#fly-in div:nth-child(3) { animation-delay: 8s}
+#fly-in div:nth-child(4) { animation-delay: 12s}
+#fly-in div:nth-child(5) { animation-delay: 16s}
+#fly-in div:nth-child(6) { animation-delay: 20s}
+#fly-in div:nth-child(7) { animation-delay: 24s}
+#fly-in div:nth-child(8) { animation-delay: 28s}
+
+@keyframes switch {
+    0% { opacity: 0;filter: blur(20px); transform:scale(12)}
+    3% { opacity: 1;filter: blur(0); transform:scale(1)}
+    10% { opacity: 1;filter: blur(0); transform:scale(.9)}
+    13% { opacity: 0;filter: blur(10px); transform:scale(.1)}
+    80% { opacity: 0}
+    100% { opacity: 0}
+}
+    </style>
+</head>
+<body>
+    <!-- Your welcome animation HTML content here -->
+    <div id="fly-in">  
+        <div><span>Get Ready for</span>Iconic</div>
+        <div>3D<span>Maze Adventure</span></div>
+        <div>Made with <span> <em> Love </em> </span></div>
+        <div><span>Using</span> CSS & HTML with three.js</div>
+        <div><span>Just for</span>Gamers</div>
+        <div>Roll Along<span>into the Dungeon</span></div>
+        <div>with me <span>for eternity</span></div>
+        <div><span>Just CSS</span> and HTML with three.js</div>
+
+        </div>
+        <a href="index.html" id="skipButton" class="initial">Skip</a>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const skipButton = document.getElementById("skipButton");
+    const flyInContainer = document.getElementById("fly-in");
+
+    let isLooping = true;
+
+    skipButton.addEventListener("click", function () {
+        if (isLooping) {
+            flyInContainer.style.animation = "none"; // Stop the animation
+            isLooping = false;
+        } else {
+            flyInContainer.style.animation = "switch 32s linear infinite"; // Resume the animation
+            isLooping = true;
+        }
+    });
+
+    // Add an event listener for the animation end event
+    flyInContainer.addEventListener("animationend", function () {
+                // Redirect to index.html after animation completes
+                window.location.href = "index.html";
+            });
+
+});
+
+const coords = { x: 0, y: 0 };
+const circles = document.querySelectorAll(".circle");
+
+const colors = [
+"#262626",
+  "#2c2c2c",
+  "#313131",
+  "#373737",
+  "#3c3c3c",
+  "#424242",
+  "#474747",
+  "#4d4d4d",
+  "#525252",
+  "#575757",
+  "#5d5d5d",
+  "#626262",
+  "#686868",
+  "#6d6d6d",
+  "#727272",
+  "#787878",
+  "#7d7d7d",
+  "#828282",
+  "#888888",
+  "#8d8d8d",
+  "#929292",
+  "#979797"
+];
+
+circles.forEach(function (circle, index) {
+  circle.x = 0;
+  circle.y = 0;
+  circle.style.backgroundColor = colors[index % colors.length];
+});
+
+window.addEventListener("mousemove", function(e){
+  coords.x = e.clientX;
+  coords.y = e.clientY;
+  
+});
+
+function animateCircles() {
+  
+  let x = coords.x;
+  let y = coords.y;
+  
+  circles.forEach(function (circle, index) {
+    circle.style.left = x - 12 + "px";
+    circle.style.top = y - 12 + "px";
+    
+    circle.style.scale = (circles.length - index) / circles.length;
+    
+    circle.x = x;
+    circle.y = y;
+
+    const nextCircle = circles[index + 1] || circles[0];
+    x += (nextCircle.x - x) * 0.3;
+    y += (nextCircle.y - y) * 0.3;
+  });
+ 
+  requestAnimationFrame(animateCircles);
+}
+
+animateCircles();
+
+
+    </script>
+</body>
+</html>
+
+
